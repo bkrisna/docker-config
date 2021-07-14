@@ -25,8 +25,8 @@ services:
       # Uncomment this if IPv6 is not enabled on your host
       DISABLE_IPV6: 'true'
     volumes:
-      - /root/dockerproj/npm/data:/data
-      - /root/dockerproj/npm/letsencrypt:/etc/letsencrypt
+      - /docker/docker-config/npm/data:/data
+      - docker/docker-config/npm/letsencrypt:/etc/letsencrypt
     depends_on:
       - db
   db:
@@ -38,4 +38,4 @@ services:
       MYSQL_USER: 'npm'
       MYSQL_PASSWORD: 'welcome1'
     volumes:
-      - /root/dockerproj/npm/data/mysql:/var/lib/mysql
+      - /docker/docker-config/npm/data/mysql:/var/lib/mysql
