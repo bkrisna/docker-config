@@ -26,7 +26,7 @@ services:
       DISABLE_IPV6: 'true'
     volumes:
       - /docker/docker-config/npm/data:/data
-      - docker/docker-config/npm/letsencrypt:/etc/letsencrypt
+      - /docker/docker-config/npm/letsencrypt:/etc/letsencrypt
     depends_on:
       - db
   db:
