@@ -5,6 +5,6 @@ services:
     restart: on-failure
     image: guenterbailey/mktxp:latest
     volumes:
-      - /root/dockerproj/mktxp/mktxp_config:/root/mktxp:rw
+      - /docker/docker-config/mktxp/config:/root/mktxp:rw
     ports:
       - "0.0.0.0:49090:49090"
