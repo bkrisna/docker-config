@@ -1,0 +1,65 @@
+version: '3'
+services:
+  nginx-web:
+    image: nginx:alpine
+    container_name: nginx-web
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8880:8880"
+      - "8443:8443"
+    volumes:
+      - /docker/docker-config/nginx/config:/etc/nginx
+	  - /web-data:/web-data
+	  - /var/log/nginx:/var/log/nginx
+    networks:
+      - app-network
+
+  nginx-ui:
+    image: schenkd/nginx-ui:latest
+    container_name: nginx-ui
+    restart: unless-stopped
+    ports:
+      - 8881:8080
+    volumes:
+      - /docker/docker-config/nginx/config:/etc/nginx
+    networks:
+      - app-network
+
+  mysql-db:
+    image: mysql:5.7.22
+    container_name: mysal-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: welcome1
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - app-network
+	
+  pma:
+    image: phpmyadmin/phpmyadmin:5
+    container_name: pma
+    restart: unless-stopped
+    ports:
+      - 8882:80
+    environment:
+	  PMA_HOST: mysql-db
+	  PMA_ARBITRARY: 1
+	  MYSQL_USERNAME: root
+	  MYSQL_ROOT_PASSWORD: welcome1
+    networks:
+      - app-network
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+	  
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
