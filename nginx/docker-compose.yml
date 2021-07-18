@@ -10,7 +10,7 @@ services:
       - "8443:8443"
     volumes:
       - /docker/docker-config/nginx/config:/etc/nginx
-	  - /web-data:/web-data
+      - /web-data:/web-data
 	  - /var/log/nginx:/var/log/nginx
 
   nginx-ui:
