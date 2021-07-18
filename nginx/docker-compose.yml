@@ -12,8 +12,6 @@ services:
       - /docker/docker-config/nginx/config:/etc/nginx
 	  - /web-data:/web-data
 	  - /var/log/nginx:/var/log/nginx
-    networks:
-      - app-network
 
   nginx-ui:
     image: schenkd/nginx-ui:latest
@@ -23,8 +21,6 @@ services:
       - 8881:8080
     volumes:
       - /docker/docker-config/nginx/config:/etc/nginx
-    networks:
-      - app-network
 
   mysql-db:
     image: mysql:5.7
@@ -39,8 +35,6 @@ services:
       SERVICE_NAME: mysql
     volumes:
 	  - /mysql_data:/var/lib/mysql
-    networks:
-      - app-network
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
       interval: 5s
@@ -57,15 +51,7 @@ services:
 	  PMA_ARBITRARY: 1
 	  MYSQL_USERNAME: root
 	  MYSQL_ROOT_PASSWORD: welcome1
-    networks:
-      - app-network
     depends_on:
       mysql-db:
         condition: service_healthy
-	  
-
-#Docker Networks
-networks:
-  app-network:
-    driver: bridge
 
