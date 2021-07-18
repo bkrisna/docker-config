@@ -1,0 +1,8 @@
+services:
+  nginx-ui:
+    image: schenkd/nginx-ui:latest
+    ports:
+      - 8080:8080
+    volumes:
+      - /etc/nginx:/etc/nginx
+

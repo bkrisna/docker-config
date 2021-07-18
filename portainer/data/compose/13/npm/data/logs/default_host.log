@@ -1,0 +1,8 @@
+192.168.88.20 - - [18/Jul/2021:21:20:04 +0000] "GET / HTTP/1.1" 404 183 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36"
+192.168.88.20 - - [18/Jul/2021:21:20:05 +0000] "GET /favicon.ico HTTP/1.1" 404 183 "http://192.168.88.2/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36"
+192.168.88.20 - - [18/Jul/2021:21:30:46 +0000] "GET / HTTP/1.1" 404 183 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36"
+192.168.88.20 - - [18/Jul/2021:21:30:46 +0000] "GET /favicon.ico HTTP/1.1" 404 183 "http://bapusrv01.bapuhome.net/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36"
+192.168.88.20 - - [18/Jul/2021:21:30:48 +0000] "GET / HTTP/1.1" 404 183 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36"
+192.168.88.20 - - [18/Jul/2021:21:30:51 +0000] "GET / HTTP/1.1" 404 183 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36"
+192.168.88.20 - - [18/Jul/2021:21:31:29 +0000] "GET / HTTP/1.1" 404 183 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36"
+192.168.88.20 - - [18/Jul/2021:21:31:30 +0000] "GET / HTTP/1.1" 301 166 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36"
