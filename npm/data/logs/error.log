@@ -251,3 +251,4 @@
 2021/07/18 21:26:50 [warn] 211#211: conflicting server name "npm.bapuhome.net" on 0.0.0.0:80, ignored
 2021/07/18 21:27:00 [warn] 211#211: conflicting server name "npm.bapuhome.net" on 0.0.0.0:80, ignored
 2021/07/18 21:29:11 [warn] 1590#1590: *551 an upstream response is buffered to a temporary file /var/cache/nginx/proxy_temp/3/00/0000000003 while reading upstream, client: 192.168.88.20, server: pihole.bapuhome.net, request: "GET /admin/style/vendor/font-awesome/js/all.min.js?v=1619032969 HTTP/1.1", upstream: "http://192.168.88.2:8080/admin/style/vendor/font-awesome/js/all.min.js?v=1619032969", host: "pihole.bapuhome.net", referrer: "http://pihole.bapuhome.net/admin/"
+2021/07/18 21:42:11 [error] 273#273: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: nginxproxymanager, request: "GET /api/ HTTP/1.1", upstream: "http://127.0.0.1:3000/", host: "127.0.0.1:81"
