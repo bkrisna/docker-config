@@ -1,2 +1,11 @@
-mkdir /docker
-git -C /docker clone git@github.com:bkrisna/docker-config.git
+sudo mkdir /docker-files
+sudo chown -R nobody:nogroup /docker-files
+sudo chmod -R 0755 /docker-files
+
+vi ~/.cred
+  username=<username>
+  password=<password>
+
+vi /etc/fstab
+  //<server ip>/docker-files /docker-files cifs credentials=/root/.cred,_netdev 0 0
+
