@@ -13,9 +13,9 @@
 192.168.88.4 web.bapuhome.net
 192.168.88.4 monitor.bapuhome.net
 192.168.88.3 embysrv.bapuhome.net
-192.168.88.4 emby.bapuhome.net
 192.168.88.4 dockui.bapuhome.net
 192.168.88.4 torrent.bapuhome.net
 168.138.15.75 dev01.mycloud.net
 192.168.88.2 npm.bapuhome.net
 192.168.88.2 pihole.bapuhome.net
+192.168.88.2 emby.bapuhome.net
