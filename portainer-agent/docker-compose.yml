@@ -4,6 +4,7 @@ services:
   portainer-agent:
     image: portainer/agent
     restart: unless-stopped
+    container_name: portainer-agent
     ports:
       - "9001:9001"
     volumes:
