@@ -2,9 +2,10 @@ version: "3"
 
 services:
   mktxp:
-    restart: on-failure
     image: guenterbailey/mktxp:latest
+    restart: on-failure
+    container_name: mktxp
     volumes:
-      - /docker/docker-config/mktxp/config:/root/mktxp:rw
+      - /docker-files/mktxp/config:/root/mktxp:rw
     ports:
-      - "0.0.0.0:49090:49090"
+      - "49090:49090"

@@ -3,6 +3,7 @@ version: '3.2'
 services:
   portainer-agent:
     image: portainer/agent
+    container_name: portainer-agent
     restart: unless-stopped
     ports:
       - "9001:9001"
@@ -12,10 +13,11 @@ services:
 
   portainer:
     image: portainer/portainer-ce
+    container_name: portainer-app
     restart: unless-stopped
     ports:
       - "9000:9000"
       - "8000:8000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /docker/docker-config/portainer/data:/data
+      - /docker-files/portainer:/data

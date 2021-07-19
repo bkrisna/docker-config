@@ -1,9 +1,0 @@
-{
-	"auths": {},
-	"HttpHeaders": {
-		"User-Agent": "Docker-Client/19.03.13 (linux)",
-		"X-PortainerAgent-ManagerOperation": "1",
-		"X-PortainerAgent-PublicKey": "3059301306072a8648ce3d020106082a8648ce3d03010703420004da1012772f20ca51839c71ff060057aaf1afc25628b771b4e8106a68c12325eacc11de10bfbcb52bd6ca4c9a048888bbb59679e8ebdd172fe23fe153cdcc0db1",
-		"X-PortainerAgent-Signature": "rBYjaiAZnWUrUvNy0iIwq9RV6fFVYbGA8rJ0YsOW4roWrK7YX03UC4VbKO1m8ZboS06BF/o64Qg1pl/03qKpOQ"
-	}
-}

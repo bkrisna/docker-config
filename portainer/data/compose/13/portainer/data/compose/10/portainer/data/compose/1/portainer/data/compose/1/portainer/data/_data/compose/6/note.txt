@@ -1,2 +1,0 @@
-mkdir /docker
-git -C /docker clone git@github.com:bkrisna/docker-config.git

@@ -9,7 +9,7 @@ services:
       - "8880:8880"
       - "8443:8443"
     volumes:
-      - /docker/docker-config/nginx/config:/etc/nginx
+      - /docker-files/nginx/config:/etc/nginx
       - /web-data:/web-data
       - /var/log/nginx:/var/log/nginx
 
@@ -20,7 +20,7 @@ services:
     ports:
       - 8881:8080
     volumes:
-      - /docker/docker-config/nginx/config:/etc/nginx
+      - /docker-files/nginx/config:/etc/nginx
 
 #mysql-db:
 #image: mysql:5.7
