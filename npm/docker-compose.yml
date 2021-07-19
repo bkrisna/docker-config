@@ -1,8 +1,8 @@
 version: "3"
 services:
-  npm-web:
+  npm:
     image: 'jc21/nginx-proxy-manager:latest'
-    container_name: npm-web
+    container_name: npm
     restart: unless-stopped
     ports:
       - '80:80'
@@ -10,7 +10,7 @@ services:
       - '81:81'
     environment:
       # These are the settings to access your db
-      DB_MYSQL_HOST: "npm-db"
+      DB_MYSQL_HOST: "db"
       DB_MYSQL_PORT: 3306
       DB_MYSQL_USER: "npm"
       DB_MYSQL_PASSWORD: "welcome1"
@@ -23,8 +23,8 @@ services:
       - /docker-files/npm/data:/data
       - /docker-files/npm/letsencrypt:/etc/letsencrypt
     depends_on:
-      - npm-db
-  npm-db:
+      - db
+  db:
     image: 'jc21/mariadb-aria:latest'
     container_name: npm-db
     restart: unless-stopped
