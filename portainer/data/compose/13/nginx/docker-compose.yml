@@ -1,15 +1,15 @@
 version: '3'
 services:
   nginx-web:
-    image: nginx:alpine
+    image: nginx:latest
     container_name: nginx-web
     restart: unless-stopped
     tty: true
     ports:
-      - "8880:8880"
-      - "8443:8443"
+      - "8880:80"
+      - "8443:443"
     volumes:
-      - /docker/docker-config/nginx/config:/etc/nginx
+      - /docker/docker-config/nginx/config:/etc/nginx/conf.d
       - /web-data:/web-data
       - /var/log/nginx:/var/log/nginx
 
@@ -20,7 +20,7 @@ services:
     ports:
       - 8881:8080
     volumes:
-      - /docker/docker-config/nginx/config:/etc/nginx
+      - /docker/docker-config/nginx/config:/etc/nginx/conf.d
 
 #mysql-db:
 #image: mysql:5.7
