@@ -17,8 +17,8 @@ services:
       #DB_MYSQL_NAME: "npm"
       # If you would rather use Sqlite uncomment this
       # and remove all DB_MYSQL_* lines above
-      #DB_SQLITE_FILE: "/data/database.sqlite"
-      #DISABLE_IPV6: 'true'
+      DB_SQLITE_FILE: "/data/database.sqlite"
+      DISABLE_IPV6: 'true'
     volumes:
       - /docker-files/npm/data:/data
       - /docker-files/npm/letsencrypt:/etc/letsencrypt
