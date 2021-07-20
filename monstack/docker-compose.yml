@@ -77,7 +77,7 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/latest
+    image: grafana/grafana:latest
     container_name: grafana
     restart: unless-stopped
     volumes:
