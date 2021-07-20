@@ -7,7 +7,7 @@ services:
     container_name: prometheus
     restart: unless-stopped
     volumes:
-      - /docker-files/monstack/prometheus:/etc/prometheus
+      - /docker-files/monstack/prometheus/config:/etc/prometheus
       - /docker-files/monstack/prometheus/data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -28,7 +28,7 @@ services:
     container_name: alertmanager
     restart: unless-stopped
     volumes:
-      - /docker-files/monstack/alertmanager:/etc/alertmanager
+      - /docker-files/monstack/alertmanager/config:/etc/alertmanager
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
@@ -81,12 +81,12 @@ services:
     container_name: grafana
     restart: unless-stopped
     volumes:
-      - grafana_data:/var/lib/grafana
-      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
-      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - /docker-files/monstack/grafana/data:/var/lib/grafana
+      - /docker-files/monstack/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - /docker-files/monstack/grafana//datasources:/etc/grafana/provisioning/datasources
     environment:
-      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=welcome1
       - GF_USERS_ALLOW_SIGN_UP=false
     expose:
       - 3000
@@ -94,7 +94,7 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
-    
+
   pushgateway:
     image: prom/pushgateway:v1.4.1
     container_name: pushgateway
@@ -105,7 +105,21 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
-    
+
+  telegrambot:
+    image: tienbm90/prometheus-bot:0.0.1
+    container_name: telegrambot
+    restart: always
+    volumes:
+      - /docker-files/monstack/telegrambot/config:/etc/telegrambot
+      - /docker-files/monstack/telegrambot/config.yaml:/config.yaml  
+    expose:
+      - 9087
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
   caddy:
     image: caddy:2.3.0
     container_name: caddy
@@ -116,16 +130,16 @@ services:
       - "9093:9093"
       - "9091:9091"
     volumes:
-      - ./caddy:/etc/caddy
+      - /docker-files/monstack/caddy/config:/etc/caddy
     environment:
-      - ADMIN_USER=${ADMIN_USER:-admin}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-JDJhJDE0JE91S1FrN0Z0VEsyWmhrQVpON1VzdHVLSDkyWHdsN0xNbEZYdnNIZm1pb2d1blg4Y09mL0ZP}
+      - ADMIN_USER=admin
+      - ADMIN_PASSWORD=admin
+      - ADMIN_PASSWORD_HASH=JDJhJDE0JE91S1FrN0Z0VEsyWmhrQVpON1VzdHVLSDkyWHdsN0xNbEZYdnNIZm1pb2d1blg4Y09mL0ZP
     networks:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
 
 networks:
-  onitor-net:
-  driver: bridge
+  monitor-net:
+    driver: bridge
