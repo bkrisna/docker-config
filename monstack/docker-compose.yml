@@ -133,8 +133,8 @@ services:
       - /docker-files/monstack/caddy/config:/etc/caddy
     environment:
       - ADMIN_USER=admin
-      - ADMIN_PASSWORD=admin
-      - ADMIN_PASSWORD_HASH=JDJhJDE0JE91S1FrN0Z0VEsyWmhrQVpON1VzdHVLSDkyWHdsN0xNbEZYdnNIZm1pb2d1blg4Y09mL0ZP
+      - ADMIN_PASSWORD=welcome1
+      - ADMIN_PASSWORD_HASH=JDJhJDE0JDVRSVgyeGxmdTZHYVgvcEdGSzcueS5PRnFzeXRLajNIYXo5U01OMUJFU3NGaEhJVFNlQ3gy
     networks:
       - monitor-net
     labels:
