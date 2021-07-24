@@ -6,7 +6,7 @@ services:
     container_name: webapp-main
     restart: always
     expose:
-       - 80
+      - 80
     environment:
       VIRTUAL_HOST: bapuhome.net
       WORDPRESS_DB_HOST: webcore-db:3306
@@ -25,7 +25,7 @@ services:
     expose:
       - 80
     environment:
-      - VIRTUAL_HOST=pam.bapuhome.net
+      - VIRTUAL_HOST=ipam.bapuhome.net
       - TZ=Asia/Jakarta
       - IPAM_DATABASE_HOST=webcore-db:3306
       - IPAM_DATABASE_USER=phpipam
