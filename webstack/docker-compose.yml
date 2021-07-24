@@ -3,7 +3,7 @@ version: "3"
 services:
   webapp-main:
     image: wordpress:latest
-    container_name: web-main
+    container_name: webapp-main
     restart: always
     expose:
        - 80
