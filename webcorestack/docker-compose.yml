@@ -46,8 +46,7 @@ services:
 
 networks:
   webcore-net:
-    external: 
-      name: webcore-net
+    external: true
 
 #  nginx-web:
 #    image: nginx:latest
