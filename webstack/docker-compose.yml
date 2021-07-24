@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  web-main:
+    image: wordpress:latest
+    container_name: web-main
+    restart: always
+    expose:
+       - 80
+    environment:
+      VIRTUAL_HOST: bapuhome.net
+      WORDPRESS_DB_HOST: webcore-db:3306
+      WORDPRESS_DB_USER: bapuuser
+      WORDPRESS_DB_PASSWORD: bapuuser
+      WORDPRESS_DB_NAME: bapuhome
+    depends_on:
+      - webcore-db 
+    networks:
+      - webcore-net
+
+networks:
+  webcore-net:
+    driver: bridge

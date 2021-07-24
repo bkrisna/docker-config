@@ -35,7 +35,7 @@ services:
       - 80
     environment:
       VIRTUAL_HOST: pma.bapuhome.net
-      PMA_HOST: mysql-db
+      PMA_HOST: webcore-db
       PMA_ARBITRARY: 1
       MYSQL_USERNAME: root
       MYSQL_ROOT_PASSWORD: welcome1
