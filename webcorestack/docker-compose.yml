@@ -46,7 +46,8 @@ services:
 
 networks:
   webcore-net:
-    driver: bridge
+    external: 
+      name: webcore-net
 
 #  nginx-web:
 #    image: nginx:latest
