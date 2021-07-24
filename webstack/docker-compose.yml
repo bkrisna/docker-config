@@ -19,4 +19,4 @@ services:
 networks:
   webapp-net:
     external:
-      name: webcore-net
+      name: webcore-stack_webcore-net
