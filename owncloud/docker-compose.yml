@@ -46,7 +46,7 @@ services:
       timeout: 5s
       retries: 5
     volumes:
-      - /docker-files/owncloud/mariadb:/var/lib/mysql
+      - /docker-files/owncloud/mariadb/data:/var/lib/mysql
 
   redis:
     image: redis:6
