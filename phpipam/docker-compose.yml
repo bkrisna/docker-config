@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  phpipam-web:
+    image: phpipam/phpipam-www:latest
+    container_name: phpipam-web
+    restart: unless-stopped
+    port:
+      - 8880:80
+    environment:
+      - TZ=Asia/Jakarta
+      - IPAM_DATABASE_HOST=phpipam-db
+      - IPAM_DATABASE_PASS=welcome1
+      - IPAM_DATABASE_WEBHOST=%
+    volumes:
+      - /docker-files/phpipam/www/phpipam-logo:/phpipam/css/images/logo
+    depends_on:
+      - phpipam-db
+    networks:
+      - ipam-net
+
+  phpipam-cron:
+    image: phpipam/phpipam-cron:latest
+    container_name: phpipam-cron
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Jakarta
+      - IPAM_DATABASE_HOST=phpipam-db
+      - IPAM_DATABASE_PASS=welcome1
+      - SCAN_INTERVAL=1h
+    depends_on:
+      - phpipam-db
+    networks:
+      - ipam-net
+
+  phpipam-db:
+    image: mariadb:latest
+    container_name: phpipam-db
+    restart: unless-stopped
+    expose:
+      - "3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=welcome1
+    volumes:
+      - /docker-files/phpipam/db:/var/lib/mysql
+    networks:
+      - ipam-net
+
+networks:
+  ipam-net:
+    driver: bridge
