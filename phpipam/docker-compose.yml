@@ -34,7 +34,7 @@ services:
       - ipam-net
 
   phpipam-db:
-    image: mariadb:latest
+    image: linuxserver/mariadb:latest
     container_name: phpipam-db
     restart: unless-stopped
     expose:
