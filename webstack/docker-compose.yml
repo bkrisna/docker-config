@@ -18,37 +18,37 @@ services:
     networks:
       - webapp-net
 
-  webapp-phpipam:
-    image: phpipam/phpipam-www:latest
-    container_name: webapp-phpipam
-    restart: unless-stopped
-    expose:
-      - 80
-    environment:
-      - VIRTUAL_HOST=ipam.bapuhome.net
-      - TZ=Asia/Jakarta
-      - IPAM_DATABASE_HOST=webcore-db:3306
-      - IPAM_DATABASE_USER=phpipam
-      - IPAM_DATABASE_PASS=phpipam
-      - IPAM_DATABASE_NAME=phpipam
-    volumes:
-      - /docker-files/webapps/phpipam/phpipam-logo:/phpipam/css/images/logo
-    networks:
-      - webapp-net
+#  webapp-phpipam:
+#    image: phpipam/phpipam-www:latest
+#    container_name: webapp-phpipam
+#    restart: unless-stopped
+#    expose:
+#      - 80
+#    environment:
+#      - VIRTUAL_HOST=ipam.bapuhome.net
+#      - TZ=Asia/Jakarta
+#      - IPAM_DATABASE_HOST=webcore-db:3306
+#      - IPAM_DATABASE_USER=phpipam
+#      - IPAM_DATABASE_PASS=phpipam
+#      - IPAM_DATABASE_NAME=phpipam
+#    volumes:
+#      - /docker-files/webapps/phpipam/phpipam-logo:/phpipam/css/images/logo
+#    networks:
+#      - webapp-net
 
-  webapp-phpipam-cron:
-    image: phpipam/phpipam-cron:latest
-    container_name: webapp-phpipam-cron
-    restart: unless-stopped
-    environment:
-      - TZ=Asia/Jakarta
-      - IPAM_DATABASE_HOST=webcore-db:3306
-      - IPAM_DATABASE_USER=phpipam
-      - IPAM_DATABASE_PASS=phpipam
-      - IPAM_DATABASE_NAME=phpipam
-      - SCAN_INTERVAL=1h
-    networks:
-      - webapp-net
+#  webapp-phpipam-cron:
+#    image: phpipam/phpipam-cron:latest
+#    container_name: webapp-phpipam-cron
+#    restart: unless-stopped
+#    environment:
+#      - TZ=Asia/Jakarta
+#      - IPAM_DATABASE_HOST=webcore-db:3306
+#      - IPAM_DATABASE_USER=phpipam
+#      - IPAM_DATABASE_PASS=phpipam
+#      - IPAM_DATABASE_NAME=phpipam
+#      - SCAN_INTERVAL=1h
+#    networks:
+#      - webapp-net
 
 networks:
   webapp-net:

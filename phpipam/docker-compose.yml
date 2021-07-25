@@ -1,41 +1,39 @@
 version: "3"
 
 services:
-  phpipam-web:
-    image: rafpe/docker-phpipam
-    container_name: phpipam-web
-    restart: unless-stopped
-    ports:
-      - 8880:80
-    environment:
-      - MYSQL_DB_HOSTNAME=phpipam-db
-      - MYSQL_DB_USERNAME=phpipam
-      - MYSQL_DB_PASSWORD=phpipam
-      - MYSQL_DB_NAME=phpipam
-      - MYSQL_DB_PORT=3306
-    volumes:
-      - /docker-files/phpipam/www/phpipam-logo:/phpipam/css/images/logo
-    depends_on:
-      - phpipam-db
-    networks:
-      - ipam-net
-
-  phpipam-db:
-    image: linuxserver/mariadb:latest
-    container_name: phpipam-db
+  webapp-phpipam-www:
+    image: phpipam/phpipam-www:latest
+    container_name: webapp-phpipam-www
     restart: unless-stopped
     expose:
-      - "3306"
+      - 80
     environment:
-      - MYSQL_ROOT_PASSWORD=welcome1
-      - MYSQL_DATABASE=phpipam
-      - MYSQL_USER=phpipam
-      - MYSQL_PASSWORD=phpipam
+      - VIRTUAL_HOST=ipam.bapuhome.net
+      - TZ=Asia/Jakarta
+      - IPAM_DATABASE_HOST=webcore-db:3306
+      - IPAM_DATABASE_USER=phpipam
+      - IPAM_DATABASE_PASS=phpipam
+      - IPAM_DATABASE_NAME=phpipam
     volumes:
-      - /docker-files/phpipam/db:/var/lib/mysql
+      - /docker-files/webapps/phpipam/phpipam-logo:/phpipam/css/images/logo
     networks:
-      - ipam-net
+      - webapp-net
+
+  webapp-phpipam-cron:
+    image: phpipam/phpipam-cron:latest
+    container_name: webapp-phpipam-cron
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Jakarta
+      - IPAM_DATABASE_HOST=webcore-db:3306
+      - IPAM_DATABASE_USER=phpipam
+      - IPAM_DATABASE_PASS=phpipam
+      - IPAM_DATABASE_NAME=phpipam
+      - SCAN_INTERVAL=1h
+    networks:
+      - webapp-net
 
 networks:
-  ipam-net:
-    driver: bridge
+  webapp-net:
+    external:
+      name: webcore-stack_webcore-net
