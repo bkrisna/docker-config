@@ -31,7 +31,7 @@ services:
       - /docker-files/owncloud/owncloud-files:/mnt/data
 
   mariadb:
-    image: linuxserver/mariadb:latest
+    image: yobasystems/alpine-mariadb:latest
     container_name: owncloud_mariadb
     restart: always
     environment:
