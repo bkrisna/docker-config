@@ -32,10 +32,39 @@ services:
     networks:
       - webapp-net
 
+  webapp-dev-php5:
+    image: nginx:latest
+    container_name: webapp-dev-php5
+    restart: always
+    expose:
+      - 80
+    environment:
+      VIRTUAL_HOST: dev-php5.bapuhome.net
+    volumes:
+      - /web-files/dev-php5:/web-files
+      - /docker-files/webapps/dev-php5/nginx-config/site.conf:/etc/nginx/conf.d/site.conf
+    networks:
+      - webapp-net
+
   php7-fpm:
     image: php:7-fpm
+    container_name: php7-fpm
+    restart: always
+    expose:
+      - 9000
     volumes:
       - /web-files/dev-php7:/web-files
+    networks:
+      - webapp-net
+
+  php5-fpm:
+    image: php:5-fpm
+    container_name: php5-fpm
+    restart: always
+    expose:
+      - 9000
+    volumes:
+      - /web-files/dev-php5:/web-files
     networks:
       - webapp-net
 
