@@ -25,8 +25,8 @@ services:
     image: visibilityspots/cloudflared:latest
     container_name: dns-cloudflared
     restart: unless-stopped
-    expose:
-      - 5054
+    ports:
+      - 5054:5054
     networks:
       - dns-net
 
