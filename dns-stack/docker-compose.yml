@@ -1,8 +1,8 @@
 version: "3"
 
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+
 services:
-  dns-pihole:
+  pihole:
     image: pihole/pihole:latest
     container_name: dns-pihole
     restart: unless-stopped
@@ -14,7 +14,7 @@ services:
     environment:
       - TZ=Asia/Jakarta
       - WEBPASSWORD=welcome1
-      - DNS1='dns-cloudflared#5054'
+      - DNS1='cloudflared#5054'
       - DNS2=''
     volumes:
       - '/docker-files/pihole/etc-pihole/:/etc/pihole/'
@@ -24,10 +24,12 @@ services:
     cap_add:
       - NET_ADMIN
 
-  dns-cloudflared:
+  cloudflared:
     image: visibilityspots/cloudflared:latest
     container_name: dns-cloudflared
     restart: unless-stopped
+    expose:
+      - 5054
     networks:
       - dns-net
 
