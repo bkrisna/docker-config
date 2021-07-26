@@ -27,6 +27,7 @@ services:
     restart: unless-stopped
     ports:
       - 5054:5054
+      - 8081:8080
     networks:
       - dns-net
 
