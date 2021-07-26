@@ -2,9 +2,9 @@ version: "3"
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
-  pihole:
+  dns-pihole:
     image: pihole/pihole:latest
-    container_name: pihole
+    container_name: dns-pihole
     restart: unless-stopped
     ports:
       - "53:53/tcp"
@@ -12,13 +12,25 @@ services:
       - "67:67/udp"
       - "8080:80/tcp"
     environment:
-      TZ: 'Asia/Jakarta'
-      WEBPASSWORD: 'welcome1'
-    # Volumes store your data between container upgrades
+      - TZ=Asia/Jakarta
+      - WEBPASSWORD=welcome1
+      - DNS1='dns-cloudflared#5054'
+      - DNS2=''
     volumes:
       - '/docker-files/pihole/etc-pihole/:/etc/pihole/'
       - '/docker-files/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/'
-    # Recommended but not required (DHCP needs NET_ADMIN)
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    networks:
+      - dns-net 
     cap_add:
       - NET_ADMIN
+
+  dns-cloudflared:
+    image: visibilityspots/cloudflared:latest
+    container_name: dns-cloudflared
+    restart: unless-stopped
+    networks:
+      - dns-net
+
+networks:
+  dns-net:
+    driver: bridge
