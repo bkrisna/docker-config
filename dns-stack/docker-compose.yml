@@ -13,8 +13,6 @@ services:
     environment:
       - TZ=Asia/Jakarta
       - WEBPASSWORD=welcome1
-      - DNS1='cloudflared#5054'
-      - DNS2=''
     volumes:
       - '/docker-files/pihole/etc-pihole/:/etc/pihole/'
       - '/docker-files/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/'
