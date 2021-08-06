@@ -6,6 +6,6 @@ services:
     restart: unless-stopped
     container_name: step-ca
     ports:
-      - "9000:9000"
+      - "9010:9000"
     volumes:
       - /docker-files/step-ca/step:/home/step
