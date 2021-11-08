@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  mitmweb:
+    image: mitmproxy/mitmproxy
+    tty: true
+    ports:
+      - 8880:8080
+      - 8881:8081
+    command: mitmweb --web-host 0.0.0.0
