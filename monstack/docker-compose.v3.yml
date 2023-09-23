@@ -1,0 +1,143 @@
+version: "3"
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - /docker-files/monstack/prometheus/config:/etc/prometheus
+      - /docker-files/monstack/prometheus/data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    ports:
+      - 9090:9090
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  alertmanager:
+    image: prom/alertmanager:v0.21.0
+    container_name: alertmanager
+    restart: unless-stopped
+    volumes:
+      - /docker-files/monstack/alertmanager/config:/etc/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    ports:
+      - 9093:9093
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  nodeexporter:
+    image: prom/node-exporter:latest
+    container_name: nodeexporter
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    ports:
+      - 9100:9100
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.40.0
+    container_name: cadvisor
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux 
+    ports:
+      - 8080:8080
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    volumes:
+      - /docker-files/monstack/grafana/data:/var/lib/grafana
+      - /docker-files/monstack/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - /docker-files/monstack/grafana//datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=nMRK4ULyT3RGHoU6fgKs4Q8FZo7pSdJN
+      - GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - 3000:3000
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  pushgateway:
+    image: prom/pushgateway:latest
+    container_name: pushgateway
+    restart: unless-stopped
+    ports:
+      - 9091:9091
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  telegrambot:
+    image: tienbm90/prometheus-bot:0.0.1
+    container_name: telegrambot
+    restart: always
+    volumes:
+      - /docker-files/monstack/telegrambot/config:/etc/telegrambot
+      - /docker-files/monstack/telegrambot/config.yaml:/config.yaml  
+    ports:
+      - 9087:9087
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+#  caddy:
+#    image: caddy:2.3.0
+#    container_name: caddy
+#    restart: unless-stopped
+#    ports:
+#      - "3000:3000"
+#      - "9092:9090"
+#      - "9093:9093"
+#      - "9091:9091"
+#    volumes:
+#      - /docker-files/monstack/caddy/config:/etc/caddy
+#    environment:
+#      - ADMIN_USER=admin
+#      - ADMIN_PASSWORD=welcome1
+#      - ADMIN_PASSWORD_HASH=JDJhJDE0JDVRSVgyeGxmdTZHYVgvcEdGSzcueS5PRnFzeXRLajNIYXo5U01OMUJFU3NGaEhJVFNlQ3gy
+#    networks:
+#      - monitor-net
+#    labels:
+#      org.label-schema.group: "monitoring"
+
+#networks:
+#  monitor-net:
+#    driver: bridge
