@@ -6,6 +6,8 @@ services:
     - postgres
     - redis
     - redis-cache
+    ports:
+    - 8000:8080
     environment:
     - CORS_ORIGIN_ALLOW_ALL=True
     - DB_HOST=postgres
