@@ -54,6 +54,10 @@ services:
     - /docker-files/netbox/netbox/media:/opt/netbox/netbox/media:rw
     - /docker-files/netbox/netbox/report:/opt/netbox/netbox/reports:rw
     - /docker-files/netbox/netbox/script:/opt/netbox/netbox/scripts:rw
+    networks:
+      nbox-stack:
+        ipv4_address: 172.20.0.2
+  
   netbox-worker:
     <<: *netbox
     depends_on:
@@ -68,6 +72,10 @@ services:
       timeout: 3s
       interval: 15s
       test: "ps -aux | grep -v grep | grep -q rqworker || exit 1"
+    networks:
+      nbox-stack:
+        ipv4_address: 172.20.0.3
+  
   netbox-housekeeping:
     <<: *netbox
     depends_on:
@@ -80,6 +88,9 @@ services:
       timeout: 3s
       interval: 15s
       test: "ps -aux | grep -v grep | grep -q housekeeping || exit 1"
+    networks:
+      nbox-stack:
+        ipv4_address: 172.20.0.4
 
   # postgres
   postgres:
@@ -92,6 +103,9 @@ services:
     - POSTGRES_USER=netbox
     volumes:
     - /docker-files/netbox/pgsql/data:/var/lib/postgresql/data
+    networks:
+      nbox-stack:
+        ipv4_address: 172.20.0.5
 
   # redis
   redis:
@@ -104,6 +118,10 @@ services:
     - REDIS_PASSWORD=H733Kdjndks81
     volumes:
     - /docker-files/netbox/redis/data:/data
+    networks:
+      nbox-stack:
+        ipv4_address: 172.20.0.6
+  
   redis-cache:
     image: docker.io/redis:7-alpine
     command:
@@ -114,3 +132,12 @@ services:
     - REDIS_PASSWORD=t4Ph722qJ5QHeQ1qfu36
     volumes:
     - /docker-files/netbox/redis/cache-data:/data
+    networks:
+      nbox-stack:
+        ipv4_address: 172.20.0.7
+
+networks:
+  nbox-stack:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
