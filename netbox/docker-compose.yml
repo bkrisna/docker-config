@@ -47,7 +47,7 @@ services:
       interval: 15s
       test: "curl -f http://192.168.88.6:8080/api/ || exit 1"
     volumes:
-    - /docker-files/netbox/netbox/configuration:/etc/netbox/config:z,ro
+    - /docker-files/netbox/netbox/config:/etc/netbox/config:z,ro
     - /docker-files/netbox/netbox/media:/opt/netbox/netbox/media:rw
     - /docker-files/netbox/netbox/report:/opt/netbox/netbox/reports:rw
     - /docker-files/netbox/netbox/script:/opt/netbox/netbox/scripts:rw
