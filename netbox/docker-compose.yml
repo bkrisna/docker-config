@@ -40,7 +40,7 @@ services:
     - REDIS_PASSWORD=H733Kdjndks81
     - REDIS_SSL=false
     - RELEASE_CHECK_URL=https://api.github.com/repos/netbox-community/netbox/releases
-    - SECRET_KEY='!zza5TE3RGe7p5dwy5@BjRa^YLK2^hVf!#^K*HeHnpwo%i^#z!2y^CXhY!^zt'
+    - SECRET_KEY='r(m)9nLGnz$(_q3N4z1k(EFsMCjjjzx08x9VhNVcfd%6RF#r!6DE@+V5Zk2X'
     - SKIP_SUPERUSER=true
     - WEBHOOKS_ENABLED=true
     user: 'unit:root'
